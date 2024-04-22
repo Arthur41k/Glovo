@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Glovo
 {
-    /// <summary>
-    /// Клас що описує кур'єрів
-    /// </summary>
+
      class Courier
     {
         public string Name { get; set; }
@@ -25,10 +24,7 @@ namespace Glovo
             this.rating = rating;
         }
 
-        /// <summary>
-        /// Метод для заповнення інформації про кур'єра
-        /// </summary>
-        /// <exception cref="Exception"></exception>
+      
         public void AddCourierInfo ()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -67,13 +63,12 @@ namespace Glovo
                     break;
                 default: throw new Exception("Ведено не правильну цифру");
             }
-            Console.ResetColor();        
+          
+            Console.ResetColor();
+            Console.WriteLine("Інформацію про кур'єра додано");
         }
 
-        /// <summary>
-        /// Метод для виводу інформації про кур'єра
-        /// </summary>
-        /// <exception cref="Exception"></exception>
+      
         public void PrintCurierInfo ()
         {
             Console.ForegroundColor = ConsoleColor.Green;

@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 
 namespace Glovo
 {
-    /// <summary>
-    /// Клас що описує ресторан
-    /// </summary>
-    public class Restaurant()
+   
+    class Restaurant
     {
 
-        string name { get; set; }
+        public string name { get; set; }
 
-        string address { get; set; }
+        public string address { get; set; }
 
-        string RestaurantType { get; set; }
+        public string RestaurantType { get; set; }
 
-        List<Dish> Dishes = new List<Dish>();
+        public int Rating { get; set; }
 
-        internal void AddInfo()
+        public List<Dish> Dishes = new List<Dish>();
+
+        public Restaurant(string name, int Rating)
         {
-            Console.Write("Ведіть ім'я ресторану \n=");
-            name = Console.ReadLine();
+            this.name = name;
+            this.Rating = Rating;
+        }
+        public void AddInfo()
+        { 
             Console.Write($"Ведіть адресу {name} \n= ");
             address = Console.ReadLine();
             Console.Write($"Оберіть тип ресторану. Кафе(1), Фаст-Фуд(2), Звичайний ресторан(3) \n= ");
@@ -137,6 +140,7 @@ namespace Glovo
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Меню завершено");
                         Console.ResetColor();
+                        Console.WriteLine("Інформацію про ресторан додано");
                     }
                     break;
                 default:
@@ -146,7 +150,17 @@ namespace Glovo
 
         }
 
-        
+        public void PrintRestourantInfo()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Ресторан {name} типу {RestaurantType} за дресою {address} має рейтинг {Rating}");
+            Console.WriteLine("Меню ресторана:");
+            foreach ( var dish in Dishes )
+            {
+                Console.WriteLine($"Назва: {dish.name}\n ");
+            }
+            Console.ResetColor();
+        }
     }
 }
 

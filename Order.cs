@@ -3,38 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Glovo
 {
-    /// <summary>
-    /// Клас що описує замовлення
-    /// </summary>
+ 
     class Order
     {
+        public int OrderNumber { get; set; }
+
         List<string> Dishes = new List<string>();
 
         public int Sum { get; set; }
 
-        public string Status { get; set; } = "";
+        public string Status = "";
 
         public string RestaurantIndo { get; set; }
         public string CourierIndo { get; set; }
         public string ClientIndo { get; set; }
 
-        public Order(List<string> Dishes,string RestaurantIndo, string CourierIndo, string ClientIndo) 
+        public Order(int OrderNumber,List<string> Dishes,string RestaurantIndo, string CourierIndo, string ClientIndo) 
         { 
+            this.OrderNumber = OrderNumber;
             this.Dishes = Dishes;
             this.RestaurantIndo = RestaurantIndo;
             this.ClientIndo = ClientIndo;
             this.CourierIndo = CourierIndo;
         }
 
-        /// <summary>
-        /// Метод що оновлює статус замовлення при кожному використані
-        /// </summary>
+       
         public void OrderUpdate()
         {
-            if(Status == "")
+            if(string.IsNullOrEmpty(Status))
             {
                 Status = "Створення замовлення";
                
@@ -47,6 +47,8 @@ namespace Glovo
             {
                 Status = "Замовлення доставлено";
             }
+
+            Console.WriteLine("Поточний статус: " + Status);
         }
     }
 }

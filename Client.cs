@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Glovo
 {
-    /// <summary>
-    /// Клас що описує клієнта
-    /// </summary>
+
      class Client
     {  
         public string Name { get; set; }
@@ -17,7 +15,7 @@ namespace Glovo
 
         public string Adress { get; set; }
 
-        List<Order> OrdersHistory = new List<Order>();
+        public List<Order> OrdersHistory = new List<Order>();
         
         public Client(string Name, int PhoneNumber, string Adress)
         {

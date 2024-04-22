@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Glovo
 {
-    /// <summary>
-    /// Клас що описує страву
-    /// </summary>
+
     class Dish
     {
-        internal Dish(string name, string description, int price, double weight )
+        public Dish(string name, string description, int price, double weight )
         {
             this.name = name;
             this.description = description;
@@ -19,12 +17,12 @@ namespace Glovo
             this.weight = weight;   
         }
 
-        string name {  get; set; }
+        public string name {  get; set; }
 
-        string description {  get; set; }
+        public string description {  get; set; }
 
-        int price {  get; set; }
+        public int price {  get; set; }
 
-        double weight { get; set; }
+        public double weight { get; set; }
     }
 }

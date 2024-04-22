@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace Glovo
 {
@@ -6,13 +7,42 @@ namespace Glovo
     {
         static void Main(string[] args)
         {
+            Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            //Створення ресторану
-            Restaurant restaurant = new Restaurant();
-            restaurant.AddInfo();
+            List<Restaurant> Restaurants = new List<Restaurant>();
+            Console.Write("Створимо  ресторани.\nСкільки додати ресторанів до списку ? (не більше 5, і враховуйте що інформація заповнюється довго)\n= ");
+            int N = int.Parse(Console.ReadLine());
+            if (N < 5 && N > 0)
+            {
+                string Name;
+                int Rating;
+                for (int i = 0; i < N; i++)
+                {
+                    Console.Write("Напишіть імя ресторану\n= ");
+                    Name = Console.ReadLine();
+                    Console.Write("Напишіть рейтинг (від 0 до 5) \n= ");
+                    int numeric = int.Parse(Console.ReadLine());
+                    if (numeric >= 0 && numeric <= 5)
+                    {
+                        Rating = numeric;
+                    }
+                    else
+                    {
+                        throw new Exception("Рейтинг ведено неправильно");
+                    }
 
-            //Створення кур'єрів
+                    Restaurant restaurant = new Restaurant(Name, Rating);
+                    restaurant.AddInfo();
+                    Restaurants.Add(restaurant);
+                }
+            }
+            else
+            {
+                throw new Exception("Некоректне число");
+            }
+
+           
             Console.WriteLine("Додайте трьох кур'єрів");
             List<Courier> Couriers = new List<Courier>();
             string name;
@@ -21,9 +51,9 @@ namespace Glovo
             {
                 Console.Write("Напишіть імя \n= ");
                 name = Console.ReadLine();
-                Console.WriteLine("Напишіть рейтинг (від 0 до 100) \n= ");
+                Console.Write("Напишіть рейтинг (від 0 до 10) \n= ");
                 int numerics = int.Parse(Console.ReadLine());
-                if(numerics >= 0 && numerics <= 100)
+                if(numerics >= 0 && numerics <= 10)
                 {
                     rating = numerics;
                 }
@@ -45,15 +75,15 @@ namespace Glovo
                 Console.WriteLine("\n");
             }
 
-            //Створення клієнта
+           
             Console.WriteLine("Додамо клієнта");
-            string Name;
+            string ClientName;
             int PhoneNumber;
             string Adress;
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write("Як звати клієнта ? \n= ");
-            Name = Console.ReadLine();
+            ClientName = Console.ReadLine();
             Console.Write("Ведіть номер телефону клієнта (9 цифр) +380 ");
             string Number = Console.ReadLine();
             if (Number.Length == 9)
@@ -75,7 +105,21 @@ namespace Glovo
             Console.Write("Ведіть адресу клієнта\n= ");
             Adress = Console.ReadLine();
 
-            Client client = new Client(Name, PhoneNumber, Adress);
+            Console.ResetColor();
+
+            Client client = new Client(ClientName, PhoneNumber, Adress);
+
+            DeliveryManager Delivery = new DeliveryManager ( Restaurants, Couriers, client);
+
+            Delivery.RestaurantChoicesing();
+            Delivery.CurierChoicesing();
+            Delivery.CreateOrder();
+            Delivery.CreatedOrder.OrderUpdate();
+            Delivery.ProcessingOrder();
+            Delivery.CreatedOrder.OrderUpdate();
+            Delivery.ProcessingOrder();
+            Delivery.CreatedOrder.OrderUpdate();
+            Delivery.ProcessingOrder();
         }
     }
 }
