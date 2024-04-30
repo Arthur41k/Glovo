@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,11 @@ namespace Glovo
         public int price {  get; set; }
 
         public double weight { get; set; }
+
+        //Власні зміні
+        public bool IsSpicy = false;
+        public bool IsHot = true;
+
+
     }
 }

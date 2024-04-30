@@ -81,16 +81,16 @@ namespace Glovo
             string RestaurantIndo = SelectedRestaurant.name;
             string CourierIndo = SelectedCourier.Name;
             string ClientIndo = client.Name;
-            List<string> SelectedDishes = new List<string>();
+            List<Dish> SelectedDishes = new List<Dish>();
             int Sums = 0;
             Console.WriteLine("Оберіть те що ви будете замовляти");
             foreach (Dish dish in SelectedRestaurant.Dishes)
             {
-                Console.Write($"Додати до замовлення {dish.name} ? \nВага: {dish.weight} грн \nЦіна: {dish.price} грам/мілілітрів \nТак(1) Ні(2)\n= ");
+                Console.Write($"Додати до замовлення {dish.name} ? \nВага: {dish.weight} грам/мілілітрів \nЦіна: {dish.price} грн \nТак(1) Ні(2)\n= ");
                 int Cho = int.Parse(Console.ReadLine());
                 if (Cho == 1) 
                 {
-                    SelectedDishes.Add(dish.name);
+                    SelectedDishes.Add(dish);
                     Sums += dish.price;
                 }
                 else if (Cho != 2 &&Cho != 1)
@@ -148,7 +148,7 @@ namespace Glovo
             else
             {
                 StatusInfo();
-                Console.Write($"Доставку на {client.Adress} завершено. \n До полати {CreatedOrder.Sum}\n Оплатити Так(1) Ні(2)\n= ");
+                Console.Write($"Доставку на {client.Adress} завершено. \n До сплати {CreatedOrder.Sum} грн\n Оплатити Так(1) Ні(2)\n= ");
                 int number = int.Parse(Console.ReadLine());
                 if (number == 1)
                 {

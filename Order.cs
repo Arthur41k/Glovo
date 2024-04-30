@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Glovo
     {
         public int OrderNumber { get; set; }
 
-        List<string> Dishes = new List<string>();
+        List<Dish> Dishes = new List<Dish>();
 
         public int Sum { get; set; }
 
@@ -22,7 +23,15 @@ namespace Glovo
         public string CourierIndo { get; set; }
         public string ClientIndo { get; set; }
 
-        public Order(int OrderNumber,List<string> Dishes,string RestaurantIndo, string CourierIndo, string ClientIndo) 
+        //Власні зміні
+        public bool IsExecuted = false;
+
+        public string FinalPlace;
+
+        
+
+
+        public Order(int OrderNumber,List<Dish> Dishes,string RestaurantIndo, string CourierIndo, string ClientIndo) 
         { 
             this.OrderNumber = OrderNumber;
             this.Dishes = Dishes;
@@ -49,6 +58,19 @@ namespace Glovo
             }
 
             Console.WriteLine("Поточний статус: " + Status);
+        }
+        
+        //Власний метод
+        public void ExecutionOrder(string Address)
+        {
+            if(Address == FinalPlace)
+            {
+                IsExecuted = true;
+            }
+            else
+            {
+                throw new Exception("Доставлено не за адресою");
+            }
         }
     }
 }

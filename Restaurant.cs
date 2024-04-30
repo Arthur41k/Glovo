@@ -20,6 +20,12 @@ namespace Glovo
 
         public List<Dish> Dishes = new List<Dish>();
 
+        //Власні зміні
+
+        public bool IsHavePermissions;
+
+        bool IsDebt;
+
         public Restaurant(string name, int Rating)
         {
             this.name = name;
@@ -161,6 +167,51 @@ namespace Glovo
             }
             Console.ResetColor();
         }
+
+        public void HavePermissions()
+        {
+            Random rnd = new Random();
+            if ( rnd.Next(1,2)==1 )
+            {
+                Console.WriteLine( "У вас немає дозвалів");
+                IsHavePermissions = false;
+            }
+            else
+            {
+                Console.WriteLine("У вас є дозволи");
+                IsHavePermissions = true;
+            }
+        }
+
+        public void DestroyRestaurant()
+        {
+            if( IsHavePermissions )
+            {
+                Console.WriteLine("У вас є всі дозволи");
+            }
+            else if( !IsHavePermissions )
+            {
+                Console.WriteLine("У вас немає дозвалів");
+                Random rnd = new Random();
+                if (rnd.Next(1, 2) == 1)
+                {
+                    IsDebt = true;
+                    Console.WriteLine("У вас були гроші аби заплатити хабар");
+                }
+                else
+                {
+                    IsDebt = false;
+                    Console.WriteLine("У вас не було грошей аби заплатити хабар. Ваш ресторан знесено");
+                    name = null;
+                    address = null;
+
+                }
+            }
+        }
+
+
+
+
     }
 }
 

@@ -18,6 +18,11 @@ namespace Glovo
         public int rating { get; set; }
 
         public string TransportType { get; set; }
+
+        //Власні зміні
+        public string Sex;
+
+        int DelayTime;
         public Courier (string Name, int rating) 
         { 
             this.Name = Name;
